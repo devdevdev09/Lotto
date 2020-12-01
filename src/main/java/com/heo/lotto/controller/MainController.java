@@ -10,6 +10,6 @@ public class MainController {
 
     @GetMapping("/lotto")
     public String getLotto(){
-        return "lotto";
+        return "lotto22";
     }
 }
