@@ -14,9 +14,20 @@
 	<name>lotto</name>
 	<description>Demo project for Spring Boot</description>
 
-	<properties>
-		<java.version>11</java.version>
-	</properties>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<java.version>11</java.version>
+			</properties>			
+		</profile>
+		<profile>
+			<id>stg</id>
+			<properties>
+				<java.version>8</java.version>
+			</properties>			
+		</profile>
+	</profiles>
 
 	<dependencies>
 		<dependency>
