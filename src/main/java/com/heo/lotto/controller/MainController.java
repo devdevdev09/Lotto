@@ -23,14 +23,12 @@ public class MainController {
     }
 
     @GetMapping(value = {"/", "/lotto", "/lotto/{cnt}"})
-    public int[] getLotto(@PathVariable Optional<Integer> cnt){
-        int num = cnt.isPresent() ? cnt.get() : 6;
+    public int[] getLotto(@PathVariable int cnt){
+        if(cnt > 6) cnt = 6;
+        if(cnt < 0) cnt = 1;
 
-        if(num > 6) num = 6;
-        if(num < 0) num = 1;
-
-        int[] arr = new int[num];
-        arr = numberService.getNumber(num);
+        int[] arr = new int[cnt];
+        arr = numberService.getNumber(cnt);
 
         return arr;
     }
