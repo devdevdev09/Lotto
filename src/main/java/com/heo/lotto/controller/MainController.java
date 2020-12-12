@@ -23,7 +23,9 @@ public class MainController {
     }
 
     @GetMapping(value = {"/", "/lotto", "/lotto/{cnt}"})
-    public int[] getLotto(@PathVariable int cnt){
+    public int[] getLotto(@PathVariable(required = false) Integer cnt){
+        if(cnt == null) 
+            cnt = 6;
         if(cnt > 6) cnt = 6;
         if(cnt < 0) cnt = 1;
 
