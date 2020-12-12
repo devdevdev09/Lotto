@@ -9,18 +9,29 @@ import org.springframework.stereotype.Service;
 @Service
 public class NumberService {
     
-    public int[] getNumber(int cnt){
-        List<Integer> list = new ArrayList<Integer>();
- 
+    final int MAX_COUNT = 45;
 
-        while(list.size() < cnt){
-            int num = new Random().nextInt(45)+1;
-            
-            if(!list.contains(num)){
-                list.add(num);
-            }
+    public int[] getNumber(int cnt){
+        List<Integer> list = initList(MAX_COUNT);
+        List<Integer> result = new ArrayList<Integer>();
+
+        while(result.size() < cnt){
+            int num = new Random().nextInt(list.size())+1;
+            result.add(num);
+            list.remove(num);
         }
 
-        return  list.stream().mapToInt(i->i).sorted().toArray();
+        return result.stream().mapToInt(i->i).sorted().toArray();
     }
+
+    public List<Integer> initList(int max){
+
+        List<Integer> list = new ArrayList<Integer>();
+
+        for(int i = 1 ; i <= max; i++){
+            list.add(i);
+        }
+
+        return list;
+    }   
 }
