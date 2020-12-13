@@ -16,9 +16,9 @@ public class NumberService {
         List<Integer> result = new ArrayList<Integer>();
 
         while(result.size() < cnt){
-            int num = new Random().nextInt(list.size())+1;
-            result.add(num);
-            list.remove(num);
+            int num = new Random().nextInt(list.size());
+            result.add(list.get(num));
+            list.remove(list.get(num));
         }
 
         return result.stream().mapToInt(i->i).sorted().toArray();
