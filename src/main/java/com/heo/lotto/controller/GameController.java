@@ -44,9 +44,6 @@ public class GameController {
     public void makeLog(){
         for(int i = 0; i < 10000; i++){
             int[] arr = numberSerivce.getNumber(LOTTO_BALL_COUNT);
-            // for(int j = 0 ; j < LOTTO_BALL_COUNT; j++){
-            //     logger.info(i + " : " + "1,2,3,4,5");
-            // }
             logger.info(i + " : " + Arrays.stream(arr).mapToObj(s->String.valueOf(s)).collect(Collectors.joining(",")));
         }
     }
