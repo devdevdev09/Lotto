@@ -13,6 +13,7 @@ public class GameEntity {
      */
     private LocalDateTime date;
     private int week;
-    private int cnt; // 회차
+    private int no; // 회차
     private int[] number;
+    private boolean isWinning;
 }
