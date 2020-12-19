@@ -5,10 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.heo.lotto.entity.GameEntity;
 import com.heo.lotto.service.NumberService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +41,12 @@ public class GameController {
         }
 
         return list;
+    }
+
+    @RequestMapping("/TEST")
+    public ResponseEntity<List<GameEntity>> createGame(){
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping("/makeLog")
