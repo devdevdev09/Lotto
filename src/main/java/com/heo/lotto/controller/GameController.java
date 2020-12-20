@@ -1,8 +1,13 @@
 package com.heo.lotto.controller;
 
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import com.heo.lotto.entity.GameEntity;
@@ -29,18 +34,18 @@ public class GameController {
     }
 
     @RequestMapping(value ={ "/create/game", "/create/game/{cnt}"})
-    public List<int[]> createGame(@PathVariable(required = false) Integer cnt){
+    public ResponseEntity<List<GameEntity>> createGame(@PathVariable(required = false) Integer cnt){
         if(cnt == null){
             cnt = 1;
         }
 
-        List<int[]> list = new ArrayList<int[]>();
+        List<GameEntity> result = new ArrayList<GameEntity>();
 
         for(int i = 0; i < cnt; i++){
-            list.add(numberSerivce.getNumber(LOTTO_BALL_COUNT));
+            result.add(setEntity());
         }
 
-        return list;
+        return new ResponseEntity<List<GameEntity>>(result, HttpStatus.OK);
     }
 
     @RequestMapping("/TEST")
@@ -55,6 +60,20 @@ public class GameController {
             int[] arr = numberSerivce.getNumber(LOTTO_BALL_COUNT);
             logger.info(i + " : " + Arrays.stream(arr).mapToObj(s->String.valueOf(s)).collect(Collectors.joining(",")));
         }
+    }
+
+    public GameEntity setEntity(){
+        // 2020-12-19 > 942회
+
+        GameEntity entity = new GameEntity();
+        entity.setDate(LocalDateTime.now());
+        entity.setNumber(numberSerivce.getNumber(LOTTO_BALL_COUNT));
+        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+        entity.setWeek(LocalDateTime.now().get(weekFields.weekOfYear()));
+        entity.setNo(950);
+        entity.setWinning(false);
+
+        return entity;
     }
     
 }
