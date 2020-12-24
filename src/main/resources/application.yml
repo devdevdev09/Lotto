@@ -1,3 +1,3 @@
 logging:
     file:
-        name: /log/lotto/makeLog.log
+        name: log/lotto/makeLog.log
