@@ -11,6 +11,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import com.heo.lotto.entity.GameEntity;
+import com.heo.lotto.service.GameService;
 import com.heo.lotto.service.NumberService;
 
 import org.slf4j.Logger;
@@ -28,9 +29,11 @@ public class GameController {
     final int LOTTO_BALL_COUNT = 6;
 
     private NumberService numberSerivce;
+    private GameService gameService;
 
-    public GameController(NumberService numberService){
+    public GameController(NumberService numberService, GameService gameService){
         this.numberSerivce = numberService;
+        this.gameService = gameService;
     }
 
     @RequestMapping(value ={ "/create/game", "/create/game/{cnt}"})
@@ -40,9 +43,15 @@ public class GameController {
         }
 
         List<GameEntity> result = new ArrayList<GameEntity>();
+        int[] target = {1,2,3,4,5,6};
 
         for(int i = 0; i < cnt; i++){
-            result.add(setEntity());
+            GameEntity game = setEntity();
+            
+            boolean isWinning = gameService.isWinning(target, game.getNumber());
+            game.setWinning(isWinning);
+
+            result.add(game);
         }
 
         return new ResponseEntity<List<GameEntity>>(result, HttpStatus.OK);
@@ -71,7 +80,7 @@ public class GameController {
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
         entity.setWeek(LocalDateTime.now().get(weekFields.weekOfYear()));
         entity.setNo(950);
-        entity.setWinning(false);
+        entity.setWinning(true);
 
         return entity;
     }
