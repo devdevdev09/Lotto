@@ -19,4 +19,18 @@ public class GameEntity {
     private int no; // 회차
     private int[] number;
     private boolean winning;
+
+    @Override
+    public String toString(){
+        return "";
+    }
+
+    public String numberToString(){
+        String numbers = "";
+        for(int num : number){
+            numbers +=  "[" + String.format("%02d", num) + "]";
+        }
+
+        return numbers;
+    }
 }

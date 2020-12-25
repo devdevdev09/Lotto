@@ -45,14 +45,16 @@ public class GameController {
         List<GameEntity> result = new ArrayList<GameEntity>();
         int[] target = {1,2,3,4,5,6};
 
+        logger.info("CREATE GAME START\n");
         for(int i = 0; i < cnt; i++){
-            GameEntity game = setEntity();
+            GameEntity game = setEntity(i+1);
             
             boolean isWinning = gameService.isWinning(target, game.getNumber());
             game.setWinning(isWinning);
 
             result.add(game);
         }
+        logger.info("CREATE GAME END\n");
 
         return new ResponseEntity<List<GameEntity>>(result, HttpStatus.OK);
     }
@@ -71,7 +73,7 @@ public class GameController {
         }
     }
 
-    public GameEntity setEntity(){
+    public GameEntity setEntity(int count){
         // 2020-12-19 > 942회
 
         GameEntity entity = new GameEntity();
@@ -81,6 +83,8 @@ public class GameController {
         entity.setWeek(LocalDateTime.now().get(weekFields.weekOfYear()));
         entity.setNo(950);
         entity.setWinning(true);
+
+        logger.info("CREATE GAME NUMBER : " + count + " : " + entity.numberToString());
 
         return entity;
     }

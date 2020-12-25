@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class NumberService {
+    Logger logger = LoggerFactory.getLogger(this.getClass());
     
     final int MAX_COUNT = 45;
 
@@ -21,7 +25,9 @@ public class NumberService {
             list.remove(list.get(num));
         }
 
-        return result.stream().mapToInt(i->i).sorted().toArray();
+        int[] lotto = result.stream().mapToInt(i->i).sorted().toArray();
+
+        return lotto;
     }
 
     public List<Integer> initList(int max){
