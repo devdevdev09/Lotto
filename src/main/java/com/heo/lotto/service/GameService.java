@@ -12,4 +12,9 @@ public class GameService {
     public int[] getWinNumberByWeek(int week){
         return null;
     }
+
+    // 몇개의 숫자가 맞았는지 체크
+    public int equalsNumberCount(int[] target, int[] input){
+        return 0;
+    }
 }
