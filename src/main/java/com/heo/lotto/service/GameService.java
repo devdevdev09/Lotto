@@ -14,7 +14,22 @@ public class GameService {
     }
 
     // 몇개의 숫자가 맞았는지 체크
+    // 개수로 1,3,4,5 등을 체크한다.
     public int equalsNumberCount(int[] target, int[] input){
-        return 0;
+        int cnt = 0;
+
+        for(int num1 : target){
+            for(int num2 : input){
+                if(num1 == num2){
+                    cnt++;
+                }
+            }
+        }
+        return cnt;
+    }
+
+    // 2등 체크
+    public boolean is2ndWin(int[] target, int[] input, int bonus){
+        return true;
     }
 }
