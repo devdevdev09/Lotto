@@ -3,6 +3,8 @@ package com.heo.lotto.service;
 import java.util.Arrays;
 import java.util.List;
 
+import com.heo.lotto.entity.RankType;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -35,16 +37,22 @@ public class GameService {
     public int isWinRank(int[] target, int[] input, int bonus){
         int cnt = equalsNumberCount(target, input, bonus);
         
-        if(cnt == 6) return 1;
-        if(cnt == 5) 
+        if(cnt == RankType.FIRST.getRequireCnt()) 
+            return RankType.FIRST.getRank();
+            
+        if(cnt == RankType.THIRD.getRequireCnt()) 
             if(is2ndWin(target, input, bonus))
-                return 2;
+                return RankType.SECOND.getRank();
             else 
-                return 3;
-        if(cnt == 4) return 4;
-        if(cnt == 3) return 5;
+                return RankType.THIRD.getRank();
 
-        return 0;
+        if(cnt == RankType.FOURTH.getRequireCnt()) 
+            return RankType.FOURTH.getRank();
+
+        if(cnt == RankType.FIFTH.getRequireCnt()) 
+                    return RankType.FIFTH.getRank();
+
+        return RankType.LOSE.getRank();
     }
 
     // 2등 체크
@@ -60,7 +68,7 @@ public class GameService {
             }
         }
 
-        if(cnt == 6)
+        if(cnt == RankType.FIRST.getRequireCnt())
             return true;
         else
             return false;
