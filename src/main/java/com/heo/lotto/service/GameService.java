@@ -1,5 +1,8 @@
 package com.heo.lotto.service;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -46,6 +49,20 @@ public class GameService {
 
     // 2등 체크
     public boolean is2ndWin(int[] target, int[] input, int bonus){
-        return true;
+        List<Object> result = Arrays.asList(input);
+        int cnt = 0;
+
+        for(int num1 : target){
+            for(Object num2 : result){
+                if(num1 == (int)num2){
+                    cnt++;
+                }
+            }
+        }
+
+        if(cnt == 6)
+            return true;
+        else
+            return false;
     }
 }
