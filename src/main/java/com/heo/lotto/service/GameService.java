@@ -73,4 +73,15 @@ public class GameService {
         else
             return false;
     }
+
+    // 회차별 상금 가져오기
+    public int[] getPriceByWeek(int week){
+        return null;
+    }
+
+
+    // 회차별 등수별 상금 가져오기
+    public int getRankPriceByWeek(int week, int rank){
+        return 0;
+    }
 }
