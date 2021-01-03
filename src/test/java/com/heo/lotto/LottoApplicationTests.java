@@ -12,18 +12,18 @@ class LottoApplicationTests {
 	void contextLoads() {
 	}
 
-	GameService gameService;
-
 	@Test
 	void checkTest(){
-		gameService = new GameService();
+		GameService gameService = new GameService();
 		int[] target = {1,2,3,4,5,6};
-		int[] input = {1,2,3,4,5,7};
+		int[] input = {1,2,3,4,5,8};
 		int bonus = 8;
 
 		int result = gameService.isWinRank(target, input, bonus);
 		if(result == 1)
-			System.out.println("test");
+			System.out.println("1등");
+		else
+			System.out.println("result : " + result);
 
 	}
 

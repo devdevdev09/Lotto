@@ -57,12 +57,20 @@ public class GameService {
 
     // 2등 체크
     public boolean is2ndWin(int[] target, int[] input, int bonus){
-        List<Object> result = Arrays.asList(input);
+        // List<Object> result = Arrays.asList(input);
         int cnt = 0;
+        int[] result = new int[target.length + 1];
 
-        for(int num1 : target){
-            for(Object num2 : result){
-                if(num1 == (int)num2){
+        int i = 0;
+        for(int num : target){
+            result[i++] = num;
+        }
+
+        result[target.length] = bonus;
+
+        for(int num1 : result){
+            for(int num2 : input){
+                if(num1 == num2){
                     cnt++;
                 }
             }
