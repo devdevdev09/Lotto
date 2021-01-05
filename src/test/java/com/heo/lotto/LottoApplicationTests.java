@@ -89,6 +89,17 @@ class LottoApplicationTests {
 		assertEquals(result[1], "[02][05][12][15][32][39]");
 	}
 
+	@Test
+	void 로그1줄_데이터_분리하기(){
+		String str = "2020-12-26 00:05:26.215  INFO 22075 --- [http-nio-8080-exec-3] com.heo.lotto.controller.GameController  : CREATE GAME NUMBER : 9998 : [15][21][28][29][34][35]";
+		FileService fs = new FileService();
+		String[] result = fs.splitRow(str);
+
+		assertEquals(result[0], "9998");
+		assertEquals(result[1], "[15][21][28][29][34][35]");
+	}
+
 
 
 }
+
