@@ -2,6 +2,7 @@ package com.heo.lotto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.heo.lotto.service.FileService;
 import com.heo.lotto.service.GameService;
 
 import org.junit.jupiter.api.Test;
@@ -68,6 +69,26 @@ class LottoApplicationTests {
 		int result = gameService.isWinRank(target, input, bonus);
 		assertEquals(5, result);
 	}
+
+	@Test
+	void 숫자만_추출하기(){
+		String str = "[02][05][12][15][32][39]";
+		FileService fs = new FileService();
+		String result = fs.getReplaceStr(str);
+
+		assertEquals("02,05,12,15,32,39", result);
+	}
+
+	@Test
+	void 게임회차_숫자_분리하기(){
+		String str = "9982 : [02][05][12][15][32][39]";
+		FileService fs = new FileService();
+		String[] result = fs.splitGameNumber(str);
+		
+		assertEquals(result[0], "9982");
+		assertEquals(result[1], "[02][05][12][15][32][39]");
+	}
+
 
 
 }
