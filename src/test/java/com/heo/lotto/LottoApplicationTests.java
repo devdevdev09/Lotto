@@ -2,6 +2,8 @@ package com.heo.lotto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
+
 import com.heo.lotto.service.FileService;
 import com.heo.lotto.service.GameService;
 
@@ -102,9 +104,9 @@ class LottoApplicationTests {
 	@Test
 	void 리소스_텍스트_읽어오기(){
 		FileService fs = new FileService();
-		//src/main/resources/log/lotto/makeLog.log
-		fs.getFileRead("files/test.txt");
+		List<String> result = fs.getFileRead("files/test.txt");
 
+		assertEquals(3, result.size());
 	}
 
 

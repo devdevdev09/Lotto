@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.core.io.ClassPathResource;
@@ -13,20 +14,23 @@ import org.springframework.stereotype.Service;
 public class FileService {
     final String STR_DIVIDER = " : ";
 
-    public String getFileRead(String filePath) {
+    public List<String> getFileRead(String filePath) {
         ClassPathResource resource = new ClassPathResource(filePath);
+        List<String> content = new ArrayList<String>();
 
         Path path;
         try {
             path = Paths.get(resource.getURI());
-            List<String> content = Files.readAllLines(path);
-            System.out.println(content.size());
-            content.forEach(System.out::println);
+            content = Files.readAllLines(path);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "";
+        return content;
+    }
+
+    public int getLineCount(){
+        return 0;
     }
 
     public int[][] parseNumbers(){
