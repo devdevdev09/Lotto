@@ -1,12 +1,31 @@
 package com.heo.lotto.service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FileService {
     final String STR_DIVIDER = " : ";
 
-    public String getFileRead(String filePath){
+    public String getFileRead(String filePath) {
+        ClassPathResource resource = new ClassPathResource(filePath);
+
+        Path path;
+        try {
+            path = Paths.get(resource.getURI());
+            List<String> content = Files.readAllLines(path);
+            System.out.println(content.size());
+            content.forEach(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return "";
     }
 

@@ -99,6 +99,14 @@ class LottoApplicationTests {
 		assertEquals(result[1], "[15][21][28][29][34][35]");
 	}
 
+	@Test
+	void 리소스_텍스트_읽어오기(){
+		FileService fs = new FileService();
+		//src/main/resources/log/lotto/makeLog.log
+		fs.getFileRead("files/test.txt");
+
+	}
+
 
 
 }
