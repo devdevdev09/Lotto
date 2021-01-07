@@ -1,5 +1,6 @@
 package com.heo.lotto.controller;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import com.heo.lotto.service.FileService;
@@ -60,12 +61,14 @@ public class DataController {
         System.err.println("5 : " + fifth);
         System.err.println("X : " + lose);
 
-        System.out.println("==============total price===========");
+        DecimalFormat formatter = new DecimalFormat("###,###,###,###,###");
+        System.out.println("==============total============");
         int cnt = first + second + third + fourth + fifth + lose;
         double tot = first*moneys[0] + second* moneys[1] + third*moneys[2] + fourth*moneys[3] + fifth*moneys[4];
         int payed = cnt*1000;
-        System.out.println("payed : " + payed);
-        System.out.println("game : " + cnt + " : " + tot);
+        System.out.println("게임 : " + formatter.format(cnt) + "게임");
+        System.out.println("구매 : " + formatter.format(payed) + "원");
+        System.out.println("당첨 : " + formatter.format(tot) + "원");
 
     }
 

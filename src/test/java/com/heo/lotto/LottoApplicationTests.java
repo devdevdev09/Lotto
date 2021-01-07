@@ -1,9 +1,12 @@
 package com.heo.lotto;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.File;
 import java.util.List;
 
+import com.heo.lotto.controller.DataController;
 import com.heo.lotto.service.FileService;
 import com.heo.lotto.service.GameService;
 
@@ -106,7 +109,22 @@ class LottoApplicationTests {
 		FileService fs = new FileService();
 		List<String> result = fs.getFileRead("files/test.txt");
 
-		assertEquals(3, result.size());
+		assertEquals(2053, result.size());
+	}
+
+	@Test
+	void 로그를_숫자_배열로(){
+		String str = "12,17,25,37,39,40";
+		FileService fs = new FileService();
+		int[] result = fs.logToNum(str);
+		int[] exp = {12,17,25,37,39,40};
+
+		assertArrayEquals(result, exp);
+	}
+
+	@Test
+	void 컨트롤러_테스트(){
+		// TODO...
 	}
 
 
