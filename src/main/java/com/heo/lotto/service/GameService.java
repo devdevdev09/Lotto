@@ -92,4 +92,8 @@ public class GameService {
     public int getRankPriceByWeek(int week, int rank){
         return 0;
     }
+
+    public double winningMoney(int rank, double[] moneys){
+        return null;
+    }
 }

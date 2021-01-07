@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.core.io.ClassPathResource;
@@ -41,6 +42,12 @@ public class FileService {
         return null;
     }
 
+    public boolean isLogData(String log){
+        String[] arr = log.split(STR_DIVIDER);
+
+        return arr.length == 4;
+    }
+
     // 9982 : [02][05][12][15][32][39]
     public String[] splitGameNumber(String str){
         String[] result = str.split(STR_DIVIDER);
@@ -61,6 +68,13 @@ public class FileService {
         result[1] = str.split(STR_DIVIDER)[3];
 
         return result;
+    }
+
+    // 12,17,25,37,39,40   
+    public int[] logToNum(String log){
+        String[] str = log.split(",");
+        
+        return Arrays.stream(str).mapToInt(s->Integer.parseInt(s)).toArray();
     }
 
 
