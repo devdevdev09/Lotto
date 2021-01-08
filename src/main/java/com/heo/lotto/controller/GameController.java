@@ -1,8 +1,6 @@
 package com.heo.lotto.controller;
 
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +9,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import com.heo.lotto.entity.GameEntity;
+import com.heo.lotto.service.FileService;
 import com.heo.lotto.service.GameService;
 import com.heo.lotto.service.NumberService;
 
@@ -30,10 +29,12 @@ public class GameController {
 
     private NumberService numberSerivce;
     private GameService gameService;
+    private FileService fileService;
 
-    public GameController(NumberService numberService, GameService gameService){
+    public GameController(NumberService numberService, GameService gameService, FileService fileService){
         this.numberSerivce = numberService;
         this.gameService = gameService;
+        this.fileService = fileService;
     }
 
     @RequestMapping(value ={ "/create/game", "/create/game/{cnt}"})
@@ -84,7 +85,7 @@ public class GameController {
         entity.setNo(950);
         entity.setWinning(true);
 
-        logger.info("CREATE GAME NUMBER : " + count + " : " + entity.numberToString());
+        fileService.writeLog("CREATE GAME NUMBER : " + count + " : " + entity.numberToString());
 
         return entity;
     }

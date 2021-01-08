@@ -1,33 +1,49 @@
 package com.heo.lotto.service;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FileService {
+
+    private DateService dateService;
+
+    public FileService(DateService dateService){
+        this.dateService = dateService;
+    }
+
     final String STR_DIVIDER = " : ";
 
+
     public List<String> getFileRead(String filePath) {
-        ClassPathResource resource = new ClassPathResource(filePath);
         List<String> content = new ArrayList<String>();
 
-        Path path;
+        Path path = Paths.get("/data/lotto/2020-01-08.log");
         try {
-            path = Paths.get(resource.getURI());
+            //path = Paths.get(resource.getURI());
             content = Files.readAllLines(path);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return content;
+    }
+
+    public String getDate(){
+        LocalDate date = LocalDate.now().plusDays(-1);
+        
+        return date.toString();
     }
 
     public int getLineCount(){
@@ -75,6 +91,31 @@ public class FileService {
         String[] str = log.split(",");
         
         return Arrays.stream(str).mapToInt(s->Integer.parseInt(s)).toArray();
+    }
+
+    public void writeLog(String log){
+        String today = dateService.getToday().toString();
+        File file = new File("/logs/data-" + today + ".txt");
+        
+        if(!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        FileWriter fw;
+        try {
+            fw = new FileWriter(file.getAbsolutePath(), true);
+            BufferedWriter writer = new BufferedWriter(fw);
+            writer.append(dateService.todayTime() + log + "\n");
+
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

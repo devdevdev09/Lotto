@@ -94,6 +94,6 @@ public class GameService {
     }
 
     public double winningMoney(int rank, double[] moneys){
-        return null;
+        return 0;
     }
 }
