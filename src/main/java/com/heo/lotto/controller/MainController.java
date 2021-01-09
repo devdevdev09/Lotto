@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class MainController {
 
-    NumberService numberService;
+    private final NumberService numberService;
 
     public MainController(NumberService numberService){
         this.numberService = numberService;

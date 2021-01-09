@@ -14,8 +14,8 @@ public class DataController {
     // TODO
     // 상금 정보등 기타 데이터 가져오기
     // 매주 10시경 파싱하기??
-    FileService fileService;
-    GameService gameService;
+    private final FileService fileService;
+    private final GameService gameService;
 
     public DataController(FileService fileService, GameService gameService){
         this.fileService = fileService;

@@ -1,8 +1,5 @@
 package com.heo.lotto.service;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.heo.lotto.entity.RankType;
 
 import org.springframework.stereotype.Service;

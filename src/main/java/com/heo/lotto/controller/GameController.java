@@ -27,9 +27,9 @@ public class GameController {
 
     final int LOTTO_BALL_COUNT = 6;
 
-    private NumberService numberSerivce;
-    private GameService gameService;
-    private FileService fileService;
+    private final NumberService numberSerivce;
+    private final GameService gameService;
+    private final FileService fileService;
 
     public GameController(NumberService numberService, GameService gameService, FileService fileService){
         this.numberSerivce = numberService;
