@@ -3,10 +3,7 @@ package com.heo.lotto;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.File;
-import java.util.List;
-
-import com.heo.lotto.controller.DataController;
+import com.heo.lotto.service.DateService;
 import com.heo.lotto.service.FileService;
 import com.heo.lotto.service.GameService;
 
@@ -78,7 +75,7 @@ class LottoApplicationTests {
 	@Test
 	void 숫자만_추출하기(){
 		String str = "[02][05][12][15][32][39]";
-		FileService fs = new FileService();
+		FileService fs = new FileService(new DateService());
 		String result = fs.getReplaceStr(str);
 
 		assertEquals("02,05,12,15,32,39", result);
@@ -87,7 +84,7 @@ class LottoApplicationTests {
 	@Test
 	void 게임회차_숫자_분리하기(){
 		String str = "9982 : [02][05][12][15][32][39]";
-		FileService fs = new FileService();
+		FileService fs = new FileService(new DateService());
 		String[] result = fs.splitGameNumber(str);
 		
 		assertEquals(result[0], "9982");
@@ -97,7 +94,7 @@ class LottoApplicationTests {
 	@Test
 	void 로그1줄_데이터_분리하기(){
 		String str = "2020-12-26 00:05:26.215  INFO 22075 --- [http-nio-8080-exec-3] com.heo.lotto.controller.GameController  : CREATE GAME NUMBER : 9998 : [15][21][28][29][34][35]";
-		FileService fs = new FileService();
+		FileService fs = new FileService(new DateService());
 		String[] result = fs.splitRow(str);
 
 		assertEquals(result[0], "9998");
@@ -105,17 +102,9 @@ class LottoApplicationTests {
 	}
 
 	@Test
-	void 리소스_텍스트_읽어오기(){
-		FileService fs = new FileService();
-		List<String> result = fs.getFileRead("files/test.txt");
-
-		assertEquals(2053, result.size());
-	}
-
-	@Test
 	void 로그를_숫자_배열로(){
 		String str = "12,17,25,37,39,40";
-		FileService fs = new FileService();
+		FileService fs = new FileService(new DateService());
 		int[] result = fs.logToNum(str);
 		int[] exp = {12,17,25,37,39,40};
 
