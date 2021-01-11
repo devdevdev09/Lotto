@@ -9,6 +9,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import com.heo.lotto.entity.GameEntity;
+import com.heo.lotto.enums.LogType;
 import com.heo.lotto.service.FileService;
 import com.heo.lotto.service.GameService;
 import com.heo.lotto.service.NumberService;
@@ -85,7 +86,7 @@ public class GameController {
         entity.setNo(950);
         entity.setWinning(true);
 
-        fileService.writeLog("CREATE GAME NUMBER : " + count + " : " + entity.numberToString());
+        fileService.writeLog("CREATE GAME NUMBER : " + count + " : " + entity.numberToString(), LogType.GAME);
 
         return entity;
     }

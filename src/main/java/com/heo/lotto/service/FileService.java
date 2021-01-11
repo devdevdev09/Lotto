@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.heo.lotto.enums.LogType;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -93,7 +95,7 @@ public class FileService {
         return Arrays.stream(str).mapToInt(s->Integer.parseInt(s)).toArray();
     }
 
-    public void writeLog(String log){
+    public void writeLog(String log, LogType type){
         String today = dateService.getToday().toString();
         File file = new File("/logs/data-" + today + ".txt");
         
@@ -109,7 +111,7 @@ public class FileService {
         try {
             fw = new FileWriter(file.getAbsolutePath(), true);
             BufferedWriter writer = new BufferedWriter(fw);
-            writer.append(dateService.todayTime() + log + "\n");
+            writer.append(dateService.todayTime() + STR_DIVIDER + type + STR_DIVIDER + log + "\n");
 
             writer.close();
 
