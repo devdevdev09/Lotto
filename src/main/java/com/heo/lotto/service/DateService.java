@@ -22,10 +22,14 @@ public class DateService {
     public String getTime(){
         LocalDateTime time = LocalDateTime.now();
 
-        return time.getHour() + ":" + time.getMinute() + ":" + time.getSecond();
+        return format(time.getHour()) + ":" + format(time.getMinute())  + ":" + format(time.getSecond());
     }
 
     public String todayTime(){
         return getToday() + " " + getTime() + " ";
+    }
+
+    public String format(int time){
+        return String.format("%02d", time);
     }
 }

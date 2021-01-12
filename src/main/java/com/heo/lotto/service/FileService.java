@@ -11,9 +11,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
+import java.util.regex.Pattern;
 
 import com.heo.lotto.enums.LogType;
 
+import org.apache.xerces.impl.xpath.regex.RegularExpression;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -111,13 +114,25 @@ public class FileService {
         try {
             fw = new FileWriter(file.getAbsolutePath(), true);
             BufferedWriter writer = new BufferedWriter(fw);
-            writer.append(dateService.todayTime() + STR_DIVIDER + type + STR_DIVIDER + log + "\n");
+            writer.append(dateService.todayTime() + STR_DIVIDER + "게임번호" + STR_DIVIDER + type + STR_DIVIDER + log + "\n");
 
             writer.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getGameNo(){
+        String no = dateService.getToday() + dateService.getTime();
+    
+        return no.replaceAll("[^0-9]", "");
+    }
+
+    public String getUUID(){
+        UUID uuid = UUID.randomUUID();
+        
+        return uuid.toString();
     }
 
 

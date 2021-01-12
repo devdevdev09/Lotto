@@ -6,8 +6,10 @@ import com.heo.lotto.entity.RankType;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestComponent;
 
 @SpringBootTest
+@TestComponent
 public class GameServiceTest {
 
     GameService gameService = new GameService();
