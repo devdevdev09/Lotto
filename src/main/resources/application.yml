@@ -4,3 +4,8 @@ logging:
 
 str:
     divider: " : "
+
+data:
+    path:
+        mynumber: /logs/mynumber.txt
+

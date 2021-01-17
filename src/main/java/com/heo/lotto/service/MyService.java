@@ -12,6 +12,9 @@ public class MyService {
 
     @Value("${str.divider}")
     private String STR_DIVIDER;
+    
+    @Value("${data.path.mynumber}")
+    private String MY_NUMBER_PATH;
 
     public MyService(FileService fileService, DateService dateService){
         this.fileService = fileService;
@@ -19,14 +22,14 @@ public class MyService {
     }
 
     public void writeMyNumber(String content){
-        fileService.writeFile(content, "/logs/mynumber.txt");
+        fileService.writeFile(content, MY_NUMBER_PATH);
     }
 
     public void writeArr(int[] arr){
         String content = getNumberString(arr);
         String time = dateService.todayTime();
 
-        fileService.writeFile(time + STR_DIVIDER + content, "/logs/mynumber.txt");
+        fileService.writeFile(time + STR_DIVIDER + content, MY_NUMBER_PATH);
     }
 
     public String getNumberString(int[] arr){
