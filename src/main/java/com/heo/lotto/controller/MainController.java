@@ -2,6 +2,7 @@ package com.heo.lotto.controller;
 
 import java.util.Optional;
 
+import com.heo.lotto.service.MyService;
 import com.heo.lotto.service.NumberService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
 
     private final NumberService numberService;
+    private final MyService myService;
 
-    public MainController(NumberService numberService){
+    public MainController(NumberService numberService, MyService myService){
         this.numberService = numberService;
+        this.myService = myService;
     }
 
     @GetMapping(value = {"/", "/lotto", "/lotto/{cnt}"})
@@ -42,6 +45,8 @@ public class MainController {
 
         int[] arr = new int[cnt2];
         arr = numberService.getNumber(cnt2);
+
+        myService.writeArr(arr);
 
         return arr;
     }

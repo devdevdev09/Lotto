@@ -100,7 +100,14 @@ public class FileService {
 
     public void writeLog(String log, LogType type){
         String today = dateService.getToday().toString();
-        File file = new File("/logs/data-" + today + ".txt");
+
+        writeFile(dateService.todayTime() + STR_DIVIDER + "게임번호" + STR_DIVIDER + type + STR_DIVIDER + log + "\n"
+            ,"/logs/data-" + today + ".txt");
+        
+    }
+
+    public void writeFile(String content, String path){
+        File file = new File(path);
         
         if(!file.exists()){
             try {
@@ -114,7 +121,7 @@ public class FileService {
         try {
             fw = new FileWriter(file.getAbsolutePath(), true);
             BufferedWriter writer = new BufferedWriter(fw);
-            writer.append(dateService.todayTime() + STR_DIVIDER + "게임번호" + STR_DIVIDER + type + STR_DIVIDER + log + "\n");
+            writer.append(content + "\n");
 
             writer.close();
 
