@@ -12,24 +12,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.regex.Pattern;
 
 import com.heo.lotto.enums.LogType;
 
-import org.apache.xerces.impl.xpath.regex.RegularExpression;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FileService {
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Value("${str.divider}")
+    private String STR_DIVIDER;
+    
     private DateService dateService;
 
     public FileService(DateService dateService){
         this.dateService = dateService;
     }
-
-    final String STR_DIVIDER = " : ";
-
 
     public List<String> getFileRead(String filePath) {
         List<String> content = new ArrayList<String>();
@@ -69,14 +71,12 @@ public class FileService {
         return arr.length == 4;
     }
 
-    // 9982 : [02][05][12][15][32][39]
     public String[] splitGameNumber(String str){
         String[] result = str.split(STR_DIVIDER);
         
         return result;
     }
 
-    // 9982 : [02][05][12][15][32][39]
     public String getReplaceStr(String str){
         String result = str.replace("][", ",").replace("[", "").replace("]", "");
 
@@ -91,7 +91,6 @@ public class FileService {
         return result;
     }
 
-    // 12,17,25,37,39,40   
     public int[] logToNum(String log){
         String[] str = log.split(",");
         
@@ -141,6 +140,5 @@ public class FileService {
         
         return uuid.toString();
     }
-
 
 }
