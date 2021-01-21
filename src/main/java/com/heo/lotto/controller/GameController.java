@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-import com.heo.lotto.entity.GameEntity;
+import com.heo.lotto.entity.Game;
 import com.heo.lotto.enums.LogType;
 import com.heo.lotto.service.FileService;
 import com.heo.lotto.service.GameService;
@@ -39,17 +39,17 @@ public class GameController {
     }
 
     @RequestMapping(value ={ "/create/game", "/create/game/{cnt}"})
-    public ResponseEntity<List<GameEntity>> createGame(@PathVariable(required = false) Integer cnt){
+    public ResponseEntity<List<Game>> createGame(@PathVariable(required = false) Integer cnt){
         if(cnt == null){
             cnt = 1;
         }
 
-        List<GameEntity> result = new ArrayList<GameEntity>();
+        List<Game> result = new ArrayList<Game>();
         int[] target = {1,2,3,4,5,6};
 
         logger.info("CREATE GAME START\n");
         for(int i = 0; i < cnt; i++){
-            GameEntity game = setEntity(i+1);
+            Game game = setEntity(i+1);
             
             boolean isWinning = gameService.isWinning(target, game.getNumber());
             game.setWinning(isWinning);
@@ -58,11 +58,11 @@ public class GameController {
         }
         logger.info("CREATE GAME END\n");
 
-        return new ResponseEntity<List<GameEntity>>(result, HttpStatus.OK);
+        return new ResponseEntity<List<Game>>(result, HttpStatus.OK);
     }
 
     @RequestMapping("/TEST")
-    public ResponseEntity<List<GameEntity>> createGame(){
+    public ResponseEntity<List<Game>> createGame(){
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -75,10 +75,10 @@ public class GameController {
         }
     }
 
-    public GameEntity setEntity(int count){
+    public Game setEntity(int count){
         // 2020-12-19 > 942회
 
-        GameEntity entity = new GameEntity();
+        Game entity = new Game();
         entity.setDate(LocalDateTime.now());
         entity.setNumber(numberSerivce.getNumber(LOTTO_BALL_COUNT));
         WeekFields weekFields = WeekFields.of(Locale.getDefault());

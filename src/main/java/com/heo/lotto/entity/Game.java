@@ -10,7 +10,7 @@ import lombok.Data;
 @Repository
 @Component
 @Data
-public class GameEntity {
+public class Game {
     /*
     @Repository 와 @Component
      */
