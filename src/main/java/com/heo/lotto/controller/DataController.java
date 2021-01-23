@@ -6,6 +6,7 @@ import java.util.List;
 import com.heo.lotto.service.FileService;
 import com.heo.lotto.service.GameService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,9 +15,10 @@ public class DataController {
     // TODO
     // 상금 정보등 기타 데이터 가져오기
     // 매주 10시경 파싱하기??
-    private final FileService fileService;
-    private final GameService gameService;
+    private FileService fileService;
+    private GameService gameService;
 
+    @Autowired
     public DataController(FileService fileService, GameService gameService){
         this.fileService = fileService;
         this.gameService = gameService;

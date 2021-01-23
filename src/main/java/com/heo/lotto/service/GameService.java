@@ -1,96 +1,30 @@
 package com.heo.lotto.service;
 
-import com.heo.lotto.entity.RankType;
-
 import org.springframework.stereotype.Service;
 
 @Service
-public class GameService {
+public interface GameService {
     
-    public boolean isWinning(int[] target, int[] input){
-        return target.equals(input);
-    }
+    public boolean isWinning(int[] target, int[] input);
 
-    public int[] getWinNumberByWeek(int week){
-        return null;
-    }
+    public int[] getWinNumberByWeek(int week);
 
     // 몇개의 숫자가 맞았는지 체크
     // 개수로 1,3,4,5 등을 체크한다.
-    public int equalsNumberCount(int[] target, int[] input, int bonus){
-        int cnt = 0;
-
-        for(int num1 : target){
-            for(int num2 : input){
-                if(num1 == num2){
-                    cnt++;
-                }
-            }
-        }
-        return cnt;
-    }
+    public int equalsNumberCount(int[] target, int[] input, int bonus);
 
     // 등수 체크
-    public int isWinRank(int[] target, int[] input, int bonus){
-        int cnt = equalsNumberCount(target, input, bonus);
-        
-        if(cnt == RankType.FIRST.getRequireCnt()) 
-            return RankType.FIRST.getRank();
-            
-        if(cnt == RankType.THIRD.getRequireCnt()) 
-            if(is2ndWin(target, input, bonus))
-                return RankType.SECOND.getRank();
-            else 
-                return RankType.THIRD.getRank();
-
-        if(cnt == RankType.FOURTH.getRequireCnt()) 
-            return RankType.FOURTH.getRank();
-
-        if(cnt == RankType.FIFTH.getRequireCnt()) 
-                    return RankType.FIFTH.getRank();
-
-        return RankType.LOSE.getRank();
-    }
+    public int isWinRank(int[] target, int[] input, int bonus);
 
     // 2등 체크
-    public boolean is2ndWin(int[] target, int[] input, int bonus){
-        // List<Object> result = Arrays.asList(input);
-        int cnt = 0;
-        int[] result = new int[target.length + 1];
-
-        int i = 0;
-        for(int num : target){
-            result[i++] = num;
-        }
-
-        result[target.length] = bonus;
-
-        for(int num1 : result){
-            for(int num2 : input){
-                if(num1 == num2){
-                    cnt++;
-                }
-            }
-        }
-
-        if(cnt == RankType.FIRST.getRequireCnt())
-            return true;
-        else
-            return false;
-    }
+    public boolean is2ndWin(int[] target, int[] input, int bonus);
 
     // 회차별 상금 가져오기
-    public int[] getPriceByWeek(int week){
-        return null;
-    }
+    public int[] getPriceByWeek(int week);
 
 
     // 회차별 등수별 상금 가져오기
-    public int getRankPriceByWeek(int week, int rank){
-        return 0;
-    }
+    public int getRankPriceByWeek(int week, int rank);
 
-    public double winningMoney(int rank, double[] moneys){
-        return 0;
-    }
+    public double winningMoney(int rank, double[] moneys);
 }
