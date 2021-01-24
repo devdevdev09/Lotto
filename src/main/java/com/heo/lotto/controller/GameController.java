@@ -13,6 +13,7 @@ import com.heo.lotto.enums.LogType;
 import com.heo.lotto.service.FileService;
 import com.heo.lotto.service.GameService;
 import com.heo.lotto.service.NumberService;
+import com.heo.lotto.service.message.MessageService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,11 +32,13 @@ public class GameController {
     private final NumberService numberSerivce;
     private final GameService gameService;
     private final FileService fileService;
+    private final MessageService messageService;
 
-    public GameController(NumberService numberService, GameService gameService, FileService fileService){
+    public GameController(NumberService numberService, GameService gameService, FileService fileService, MessageService messageService){
         this.numberSerivce = numberService;
         this.gameService = gameService;
         this.fileService = fileService;
+        this.messageService = messageService;
     }
 
     @RequestMapping(value ={ "/create/game", "/create/game/{cnt}"})
@@ -63,7 +66,7 @@ public class GameController {
 
     @RequestMapping("/TEST")
     public ResponseEntity<List<Game>> createGame(){
-
+        messageService.sendMessage("testttt");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

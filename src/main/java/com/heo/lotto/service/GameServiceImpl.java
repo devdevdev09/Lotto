@@ -2,6 +2,9 @@ package com.heo.lotto.service;
 
 import com.heo.lotto.entity.RankType;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class GameServiceImpl implements GameService {
     public boolean isWinning(int[] target, int[] input){
         return target.equals(input);
