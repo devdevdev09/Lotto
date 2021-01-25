@@ -9,3 +9,6 @@ data:
     path:
         mynumber: /logs/mynumber.txt
 
+slack:
+    webhook: ${slack.webhook}
+
