@@ -12,3 +12,7 @@ data:
 slack:
     webhook: ${slack.webhook}
 
+lotto:
+    api: 
+        url: https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=900
+

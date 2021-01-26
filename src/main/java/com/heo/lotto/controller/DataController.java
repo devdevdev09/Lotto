@@ -1,22 +1,33 @@
 package com.heo.lotto.controller;
 
+import java.net.URI;
 import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.heo.lotto.service.FileService;
 import com.heo.lotto.service.GameService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class DataController {
-    // TODO
-    // 상금 정보등 기타 데이터 가져오기
-    // 매주 10시경 파싱하기??
+    
     private FileService fileService;
     private GameService gameService;
+
+    @Value("${lotto.api.url}")
+    private String WIN_API_URL;
 
     @Autowired
     public DataController(FileService fileService, GameService gameService){
@@ -28,6 +39,19 @@ public class DataController {
     int bonus = 39;
 
     double[] moneys = {3435045108.0,54156117,1472283,50000,5000};
+
+    // API 호출 에러
+    @GetMapping("/win/{num}")
+    public void getWinNumber(@PathVariable(required = false) Integer num){
+        RestTemplate restTemplate = new RestTemplate();
+
+        ParameterizedTypeReference<HashMap<String,Object>> responseType = new ParameterizedTypeReference<HashMap<String,Object>>(){};
+
+        RequestEntity<Void> request = RequestEntity.get(WIN_API_URL).accept(MediaType.APPLICATION_JSON).build();
+        ResponseEntity<HashMap<String, Object>> result = restTemplate.exchange(request, responseType);
+
+        System.out.println(result);
+    }
 
     @GetMapping("/read/log")
     public void getLogDate(){
