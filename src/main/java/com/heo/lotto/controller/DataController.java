@@ -48,7 +48,7 @@ public class DataController {
         ParameterizedTypeReference<HashMap<String,Object>> responseType = new ParameterizedTypeReference<HashMap<String,Object>>(){};
 
         RequestEntity<Void> request = RequestEntity.get(WIN_API_URL).accept(MediaType.APPLICATION_JSON).build();
-        ResponseEntity<HashMap<String, Object>> result = restTemplate.exchange(request, responseType);
+        ResponseEntity<String> result = restTemplate.exchange(request, String.class);
 
         System.out.println(result);
     }
