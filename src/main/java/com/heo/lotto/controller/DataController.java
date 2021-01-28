@@ -1,17 +1,25 @@
 package com.heo.lotto.controller;
 
 import java.net.URI;
+import java.net.http.HttpResponse;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.fasterxml.jackson.databind.util.JSONWrappedObject;
 import com.heo.lotto.service.FileService;
 import com.heo.lotto.service.GameService;
 
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +30,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class DataController {
-    
+
     private FileService fileService;
     private GameService gameService;
 
@@ -30,26 +38,26 @@ public class DataController {
     private String WIN_API_URL;
 
     @Autowired
-    public DataController(FileService fileService, GameService gameService){
+    public DataController(FileService fileService, GameService gameService) {
         this.fileService = fileService;
         this.gameService = gameService;
     }
 
-    int[] target = {1,8,13,36,44,15};
+    int[] target = { 1, 8, 13, 36, 44, 15 };
     int bonus = 39;
 
-    double[] moneys = {3435045108.0,54156117,1472283,50000,5000};
+    double[] moneys = { 3435045108.0, 54156117, 1472283, 50000, 5000 };
 
     // API 호출 에러
     @GetMapping("/win/{num}")
-    public void getWinNumber(@PathVariable(required = false) Integer num){
+    public void getWinNumber(@PathVariable(required = false) Integer num) {
         RestTemplate restTemplate = new RestTemplate();
 
-        ParameterizedTypeReference<HashMap<String,Object>> responseType = new ParameterizedTypeReference<HashMap<String,Object>>(){};
-        RequestEntity<Void> request = RequestEntity.get(WIN_API_URL).accept(MediaType.APPLICATION_JSON).build();
-        ResponseEntity<Map> result = restTemplate.exchange(request, Map.class);
+        HttpHeaders header = new HttpHeaders();
+        ResponseEntity<String> result = restTemplate.getForEntity(WIN_API_URL, String.class, header);
 
-        System.out.println(result);
+        System.out.println(result.getStatusCode());
+        System.out.println(result.getBody());
     }
 
     @GetMapping("/read/log")
@@ -95,6 +103,22 @@ public class DataController {
         System.out.println("구매 : " + formatter.format(payed) + "원");
         System.out.println("당첨 : " + formatter.format(tot) + "원");
 
+    }
+
+    static class LottoResult{
+        String totSellamnt;
+        String returnValue;
+        String drwNoDate;
+        Long firstWinamnt;
+        Long firstAccumamnt;
+        int drwtNo1;
+        int drwtNo2;
+        int drwtNo3;
+        int drwtNo4;
+        int drwtNo5;
+        int drwtNo6;
+        int bnusNo;
+        int drwNo;
     }
 
 
