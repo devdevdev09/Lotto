@@ -1,4 +1,4 @@
-package com.heo.lotto.entity;
+package com.heo.lotto.domain;
 
 import java.time.LocalDateTime;
 

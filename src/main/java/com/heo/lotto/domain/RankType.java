@@ -1,4 +1,4 @@
-package com.heo.lotto.entity;
+package com.heo.lotto.domain;
 
 public enum RankType {
     FIRST(1,6),SECOND(2,6),THIRD(3,5),FOURTH(4,4),FIFTH(5,3),LOSE(0,0);

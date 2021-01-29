@@ -1,70 +1,40 @@
 package com.heo.lotto.controller;
 
-import java.net.URI;
-import java.net.http.HttpResponse;
-import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.fasterxml.jackson.databind.util.JSONWrappedObject;
+import com.heo.lotto.domain.Lotto;
 import com.heo.lotto.service.FileService;
 import com.heo.lotto.service.GameService;
+import com.heo.lotto.service.lotto.ApiService;
 
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import lombok.Data;
-
 @RestController
 public class DataController {
-
     private FileService fileService;
     private GameService gameService;
+    private ApiService apiService;
 
-    @Value("${lotto.api.url}")
-    private String WIN_API_URL;
 
     @Autowired
-    public DataController(FileService fileService, GameService gameService) {
+    public DataController(FileService fileService, GameService gameService, ApiService apiService) {
         this.fileService = fileService;
         this.gameService = gameService;
+        this.apiService = apiService;
     }
 
     @GetMapping("/win/{num}")
-    public LottoResult getWinNumber(@PathVariable(required = false) Integer num) {
-        RestTemplate restTemplate = new RestTemplate();
-
-        HttpHeaders header = new HttpHeaders();
-        ResponseEntity<String> responseEntity = restTemplate.getForEntity(WIN_API_URL, String.class, header);
-
-        ObjectMapper mapper = new ObjectMapper();
-        LottoResult result = null;
-
-        try {
-            result = mapper.readValue(responseEntity.getBody(), LottoResult.class);
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return result;
+    public ResponseEntity<Lotto> getWinNumber(@PathVariable(required = false) Integer num) {
+        Lotto result = apiService.getLottoByNo(num);
+        
+        return ResponseEntity.ok().body(result);
     }
 
     @GetMapping("/read/log")
@@ -112,21 +82,4 @@ public class DataController {
 
     }
 
-    @Data
-    static class LottoResult{
-        Long totSellamnt; // 총판매금액
-        String returnValue; // 결과
-        String drwNoDate;   // 추첨일
-        Long firstWinamnt;  // 1등 인당금액
-        Long firstAccumamnt; // 1등 총 당첨금액
-        int firstPrzwnerCo;  // 당첨인원
-        int drwtNo1;
-        int drwtNo2;
-        int drwtNo3;
-        int drwtNo4;
-        int drwtNo5;
-        int drwtNo6;
-        int bnusNo;
-        int drwNo;              // 회차
-    }
 }

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import com.heo.lotto.entity.Game;
+import com.heo.lotto.domain.Game;
 
 public class MemoryGameReposirory implements GameRepository {
 

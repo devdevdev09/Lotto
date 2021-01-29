@@ -11,7 +11,12 @@ import org.springframework.web.client.RestTemplate;
 public class SpringConfig {
 
     @Bean
-    public MessageService messageService() {
+    public MessageService slack() {
+        return new SlackServiceImpl(new RestTemplate());
+    }
+
+    @Bean
+    public MessageService slack22() {
         return new SlackServiceImpl(new RestTemplate());
     }
     

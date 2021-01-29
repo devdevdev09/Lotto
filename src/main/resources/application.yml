@@ -17,5 +17,8 @@ slack:
 
 lotto:
     api: 
-        url: https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=900
+        url: https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=
+    base:
+        date: 2021-01-23
+        no: 947
 

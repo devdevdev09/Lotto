@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-import com.heo.lotto.entity.Game;
+import com.heo.lotto.domain.Game;
 import com.heo.lotto.enums.LogType;
 import com.heo.lotto.service.FileService;
 import com.heo.lotto.service.GameService;
@@ -32,13 +32,13 @@ public class GameController {
     private final NumberService numberSerivce;
     private final GameService gameService;
     private final FileService fileService;
-    private final MessageService messageService;
+    private final MessageService slack22;
 
-    public GameController(NumberService numberService, GameService gameService, FileService fileService, MessageService messageService){
+    public GameController(NumberService numberService, GameService gameService, FileService fileService, MessageService slack22){
         this.numberSerivce = numberService;
         this.gameService = gameService;
         this.fileService = fileService;
-        this.messageService = messageService;
+        this.slack22 = slack22;
     }
 
     @RequestMapping(value ={ "/create/game", "/create/game/{cnt}"})
@@ -66,7 +66,7 @@ public class GameController {
 
     @RequestMapping("/TEST")
     public ResponseEntity<List<Game>> createGame(){
-        messageService.sendMessage("testttt");
+        slack22.sendMessage("testttt");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

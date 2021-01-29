@@ -1,6 +1,6 @@
 package com.heo.lotto.service;
 
-import com.heo.lotto.entity.RankType;
+import com.heo.lotto.domain.RankType;
 
 import org.springframework.stereotype.Service;
 
