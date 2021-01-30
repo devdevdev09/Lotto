@@ -8,9 +8,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class CronService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    private final DataService dataService;
+
+    public CronService(DataService dataService){
+        this.dataService = dataService;
+    }
     
-    @Scheduled(cron = "0 0 * * * *")
-    public void test(){
-        logger.info("매시간 0분 0초 출력");
+    @Scheduled(cron = "0 */5 21 * * SAT")
+    public void winCheck(){
+        dataService.getWinNumber();
+    }
+
+    @Scheduled(cron = "0 0 22 * * 7")
+    public void winCheck2(){
+        dataService.updateFalse();
     }
 }

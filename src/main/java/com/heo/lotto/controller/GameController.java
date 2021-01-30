@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.heo.lotto.domain.Game;
@@ -20,7 +21,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -92,6 +97,25 @@ public class GameController {
         fileService.writeLog("CREATE GAME NUMBER : " + count + " : " + entity.numberToString(), LogType.GAME);
 
         return entity;
+    }
+
+    @PostMapping("/lotto")
+    public <T> ResponseEntity<T> lotto(
+        @RequestBody(required = false) Map<String,Object> param) {
+
+            System.out.println(param);
+        if(param != null){
+            if(param.get("key").equals("heo")){
+                System.out.println("인증");
+                Map<String,Object> data = (Map<String,Object>)param.get("data");
+                List<Integer> numbers = (List<Integer>)data.get("numbers");
+                System.out.println();
+            }else{
+                System.out.println("실패");
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     
 }
