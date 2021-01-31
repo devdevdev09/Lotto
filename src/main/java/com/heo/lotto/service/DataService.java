@@ -13,6 +13,12 @@ public class DataService {
     private MessageService slack;
     
     boolean isWinUpdate = false;
+
+    public DataService(DateService dateService, ApiService apiService, MessageService slack){
+        this.dateService = dateService;
+        this.apiService = apiService;
+        this.slack = slack;
+    }
     
     public void getWinNumber(){
 
@@ -20,7 +26,7 @@ public class DataService {
 
         Lotto result = apiService.getLottoByNo(weekNo);
         
-        if(!result.getReturnValue().equals("success") && !isWinUpdate){
+        if(!result.getReturnValue().equals("fail") && !isWinUpdate){
             isWinUpdate = true;
             slack.sendMessage(result.toString());
         }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.heo.lotto.domain.Lotto;
+import com.heo.lotto.service.DataService;
 import com.heo.lotto.service.FileService;
 import com.heo.lotto.service.GameService;
 import com.heo.lotto.service.lotto.ApiService;
@@ -21,13 +22,15 @@ public class DataController {
     private FileService fileService;
     private GameService gameService;
     private ApiService apiService;
+    private final DataService dataService;
 
 
     @Autowired
-    public DataController(FileService fileService, GameService gameService, ApiService apiService) {
+    public DataController(FileService fileService, GameService gameService, ApiService apiService, DataService dataService) {
         this.fileService = fileService;
         this.gameService = gameService;
         this.apiService = apiService;
+        this.dataService = dataService;
     }
 
     @GetMapping("/win/{num}")
@@ -37,6 +40,11 @@ public class DataController {
         return ResponseEntity.ok().body(result);
     }
 
+    @GetMapping("/win/lotto")
+    public void getWin(){
+        dataService.getWinNumber();
+    }
+    
     @GetMapping("/read/log")
     public void getLogDate(){
         // List<String> content = fileService.getFileRead("files/test.txt");
