@@ -1,6 +1,7 @@
 package com.heo.lotto;
 
 import com.heo.lotto.aop.TimeTraceAop;
+import com.heo.lotto.service.message.KakaoServiceImpl;
 import com.heo.lotto.service.message.MessageService;
 import com.heo.lotto.service.message.SlackServiceImpl;
 
@@ -13,7 +14,8 @@ public class SpringConfig {
 
     @Bean
     public MessageService slack() {
-        return new SlackServiceImpl(new RestTemplate());
+        //return new SlackServiceImpl(new RestTemplate());
+        return new KakaoServiceImpl(new RestTemplate());
     }
 
     // @Bean
