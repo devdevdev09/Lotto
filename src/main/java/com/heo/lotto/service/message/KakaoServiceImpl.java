@@ -78,11 +78,4 @@ public class KakaoServiceImpl implements MessageService {
 
         return false;
     }
-
-    // curl 
-    // -X POST "https://kapi.kakao.com/v2/api/talk/memo/default/send" 
-    // -H "Content-Type: application/x-www-form-urlencoded" 
-    // -H "Authorization: " 
-    // -d "template_object=%7B%22object_type%22%3A%20%22text%22%2C%22text%22%3A%20%22%ED%85%8D%EC%8A%A4%ED%8A%B8%20%EC%98%81%EC%97%AD%EC%9E%85%EB%8B%88%EB%8B%A4.%20%EC%B5%9C%EB%8C%80%20200%EC%9E%90%20%ED%91%9C%EC%8B%9C%20%EA%B0%80%EB%8A%A5%ED%95%A9%EB%8B%88%EB%8B%A4.%22%2C%22link%22%3A%20%7B%20%22web_url%22%3A%20%22https%3A%2F%2Fdevelopers.kakao.com%22%2C%22mobile_web_url%22%3A%20%22https%3A%2F%2Fdevelopers.kakao.com%22%7D%2C%22button_title%22%3A%20%22%EB%B0%94%EB%A1%9C%20%ED%99%95%EC%9D%B8%22%7D"
-    
 }
