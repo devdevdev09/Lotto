@@ -42,37 +42,44 @@ public class KakaoServiceImpl implements MessageService {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        Map<String, Object> body = new HashMap<String, Object>();
+        Map<String, String> body = new HashMap<String, String>();
 
         Map<String, Object> link = new HashMap<String, Object>();
         link.put("web_url", "");
         link.put("mobile_web_url", "");
+        
+
+        Map<String, Object> temp = new HashMap<String, Object>();
+        temp.put("link", link);
+        temp.put("object_type", "text");
+        temp.put("text", "test message");
         link.put("button_title", "btn");
 
-        Map<String, Object> template_object = new HashMap<String, Object>();
-        template_object.put("link", link);
-        template_object.put("object_type", "text");
-        template_object.put("text", "test message");
+        Map<String,Object> bo = new HashMap<String,Object>();
+        
         String json = "";
         try {
-            json = mapper.writeValueAsString(template_object);
+            json = mapper.writeValueAsString(temp);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        try {
-            body.put("template_object", URLEncoder.encode(json, "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        
+        // try {
+        //     json =  URLEncoder.encode(json, "UTF-8");
+        // } catch (UnsupportedEncodingException e) {
+        //     e.printStackTrace();
+        // }
+        bo.put("template_object", json);
 
-       HttpEntity entity = new HttpEntity(body,headers);
+       HttpEntity template_object = new HttpEntity(bo,headers);
        
        UriComponents uri = UriComponentsBuilder.fromHttpUrl(SEND_ME_URL).build();
 
         ResponseEntity result = restTemplate
-               .postForEntity(
-                uri.toString() 
-        ,  entity, ResponseEntity.class);
+               .postForObject(
+                SEND_ME_URL 
+                ,  template_object
+                , ResponseEntity.class);
 
        System.out.println("result : " + result);
 

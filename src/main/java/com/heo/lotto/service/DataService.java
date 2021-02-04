@@ -27,7 +27,7 @@ public class DataService {
         Lotto result = apiService.getLottoByNo(weekNo);
         
         if(!result.getReturnValue().equals("fail") && !isWinUpdate){
-            isWinUpdate = true;
+            //isWinUpdate = true;
             slack.sendMessage(result.toString());
         }
     }
