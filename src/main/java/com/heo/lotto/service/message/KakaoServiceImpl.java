@@ -1,25 +1,9 @@
 package com.heo.lotto.service.message;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
 
 public class KakaoServiceImpl implements MessageService {
 
@@ -40,49 +24,28 @@ public class KakaoServiceImpl implements MessageService {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + KAKAO_KEY);
 
-        ObjectMapper mapper = new ObjectMapper();
+        // Map<String,String> body = new MultivalueHashMap<String,String>();
+        String bo = ("template_object={\"object_type\": \"text\",\"text\": \"텍스트 영역입니다. 최대 200자 표시 가능합니다.\",\"link\": { \"web_url\": \"https://developers.kakao.com\",\"mobile_web_url\": \"https://developers.kakao.com\"},\"button_title\": \"바로 확인\"}");
 
-        Map<String, String> body = new HashMap<String, String>();
+        HttpEntity request = new HttpEntity<>(bo,headers);
 
-        Map<String, Object> link = new HashMap<String, Object>();
-        link.put("web_url", "");
-        link.put("mobile_web_url", "");
-        
+        restTemplate.postForObject(SEND_ME_URL, request, Integer.class);
 
-        Map<String, Object> temp = new HashMap<String, Object>();
-        temp.put("link", link);
-        temp.put("object_type", "text");
-        temp.put("text", "test message");
-        link.put("button_title", "btn");
-
-        Map<String,Object> bo = new HashMap<String,Object>();
-        
-        String json = "";
-        try {
-            json = mapper.writeValueAsString(temp);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        
-        // try {
-        //     json =  URLEncoder.encode(json, "UTF-8");
-        // } catch (UnsupportedEncodingException e) {
-        //     e.printStackTrace();
-        // }
-        bo.put("template_object", json);
-
-       HttpEntity template_object = new HttpEntity(bo,headers);
-       
-       UriComponents uri = UriComponentsBuilder.fromHttpUrl(SEND_ME_URL).build();
-
-        ResponseEntity result = restTemplate
-               .postForObject(
-                SEND_ME_URL 
-                ,  template_object
-                , ResponseEntity.class);
-
-       System.out.println("result : " + result);
 
         return false;
     }
+
+    // static class  Template_object{
+    //     ObjectMapper mapper = new ObjectMapper();
+
+    //     Map<String, Object> link = new HashMap<String, Object>();
+    //     link.put("web_url", "http");
+    //     link.put("mobile_web_url", "http");
+
+    //     Map<String, Object> temp = new HashMap<String, Object>();
+    //     temp.put("link", link);
+    //     temp.put("object_type", "text");
+    //     temp.put("text", "test message");
+    //     temp.put("button_title", "btn");
+    // }
 }
