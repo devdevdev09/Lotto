@@ -21,15 +21,15 @@ public class KakaoServiceImpl implements MessageService {
 
     @Override
     public boolean sendMessage(String msg) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + KAKAO_KEY);
+        // HttpHeaders headers = new HttpHeaders();
+        // headers.set("Authorization", "Bearer " + KAKAO_KEY);
 
-        // Map<String,String> body = new MultivalueHashMap<String,String>();
-        String bo = ("template_object={\"object_type\": \"text\",\"text\": \"텍스트 영역입니다. 최대 200자 표시 가능합니다.\",\"link\": { \"web_url\": \"https://developers.kakao.com\",\"mobile_web_url\": \"https://developers.kakao.com\"},\"button_title\": \"바로 확인\"}");
+        // // Map<String,String> body = new MultivalueHashMap<String,String>();
+        // String bo = ("template_object={\"object_type\": \"text\",\"text\": \"텍스트 영역입니다. 최대 200자 표시 가능합니다.\",\"link\": { \"web_url\": \"https://developers.kakao.com\",\"mobile_web_url\": \"https://developers.kakao.com\"},\"button_title\": \"바로 확인\"}");
 
-        HttpEntity request = new HttpEntity<>(bo,headers);
+        // HttpEntity request = new HttpEntity<>(bo,headers);
 
-        restTemplate.postForObject(SEND_ME_URL, request, Integer.class);
+        // restTemplate.postForObject(SEND_ME_URL, request, Integer.class);
 
 
         return false;

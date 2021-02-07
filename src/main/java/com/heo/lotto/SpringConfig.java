@@ -14,8 +14,8 @@ public class SpringConfig {
 
     @Bean
     public MessageService slack() {
-        //return new SlackServiceImpl(new RestTemplate());
-        return new KakaoServiceImpl(new RestTemplate());
+        return new SlackServiceImpl(new RestTemplate());
+        // return new KakaoServiceImpl(new RestTemplate());
     }
 
     // @Bean
