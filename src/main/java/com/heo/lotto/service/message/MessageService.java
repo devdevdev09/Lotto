@@ -1,5 +1,7 @@
 package com.heo.lotto.service.message;
 
+import org.springframework.http.HttpStatus;
+
 public interface MessageService {
-    public boolean sendMessage(String msg);
+    public HttpStatus sendMessage(String msg);
 }
