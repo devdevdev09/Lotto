@@ -1,11 +1,14 @@
 package com.heo.lotto.service;
 
 import java.net.URI;
+import java.util.Map;
 
 import com.heo.lotto.service.message.MessageService;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
@@ -19,32 +22,18 @@ public class MsgServiceImpl implements MessageService{
 
     private RestTemplate restTemplate;
 
-    @Value("${kakao.talk.key}")
-    private String KAKAO_TALK_KEY;
-    private String url;
-
     public MsgServiceImpl(RestTemplate restTemplate){
         this.restTemplate = restTemplate;
     }
+
     @Override
     public HttpStatus sendMessage(String msg) {
-        // HttpHeaders headers = new HttpHeaders();
-        MultiValueMap<String,Object> body = new LinkedMultiValueMap<>();
-
-        JSONObject template_object = new JSONObject();
-        
-        template_object.put("object_type", "text");
-        template_object.put("link", new JSONObject().put("web_url", "https://developers.kakao.com"));
-        template_object.put("text", "text msg");
-        template_object.put("button_title", "click");
-
-        body.add("template_object", template_object.toString());
+        MultiValueMap<String,String> body = new LinkedMultiValueMap<>();
 
         RequestEntity request = RequestEntity
-                                .post(URI.create("https://kapi.kakao.com/v2/api/talk/memo/default/send"))
-                                .header("Authorization", "Bearer " + KAKAO_TALK_KEY)
-                                .accept(MediaType.APPLICATION_FORM_URLENCODED)
-                                .body(body);
+                                    .post(URI.create("localhost:8080/send"))
+                                    .accept(MediaType.APPLICATION_JSON)
+                                    .body(body);
 
         ResponseEntity<String> response = restTemplate.exchange(request, String.class);
         
