@@ -1,8 +1,5 @@
 package com.heo.lotto.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.heo.lotto.domain.Lotto;
 import com.heo.lotto.service.DataService;
 import com.heo.lotto.service.FileService;
@@ -10,12 +7,10 @@ import com.heo.lotto.service.GameService;
 import com.heo.lotto.service.lotto.ApiService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class DataController {

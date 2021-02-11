@@ -22,10 +22,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -84,8 +82,6 @@ public class GameController {
     }
 
     public Game setEntity(int count){
-        // 2020-12-19 > 942회
-
         Game entity = new Game();
         entity.setDate(LocalDateTime.now());
         entity.setNumber(numberSerivce.getNumber(LOTTO_BALL_COUNT));
