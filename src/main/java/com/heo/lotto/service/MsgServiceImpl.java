@@ -4,6 +4,7 @@ import java.net.URI;
 
 import com.heo.lotto.service.message.MessageService;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
@@ -16,6 +17,8 @@ public class MsgServiceImpl implements MessageService{
 
 
     private RestTemplate restTemplate;
+    @Value("${url.msgbot}")
+    private String MSG_URL;
 
     public MsgServiceImpl(RestTemplate restTemplate){
         this.restTemplate = restTemplate;
@@ -26,7 +29,7 @@ public class MsgServiceImpl implements MessageService{
         MultiValueMap<String,String> body = new LinkedMultiValueMap<>();
 
         RequestEntity request = RequestEntity
-                                    .post(URI.create("localhost:8080/send"))
+                                    .post(URI.create(MSG_URL))
                                     .accept(MediaType.APPLICATION_JSON)
                                     .body(body);
 
