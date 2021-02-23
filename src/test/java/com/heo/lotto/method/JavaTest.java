@@ -3,6 +3,11 @@ package com.heo.lotto.method;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Queue;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -56,6 +61,15 @@ public class JavaTest {
 
         int[] target = {10,20,30,40,50,60};
         assertEquals(true, Arrays.equals(target, arr3));
+        System.out.println(arr2.length);
+        Arrays.sort(arr2);
+
+        List<Integer> test = Arrays.stream(arr2).boxed().collect(Collectors.toList());
+        Collections.sort(test);
+        test.removeIf(n->(n>2));
+
+        Queue que = (Queue) Arrays.stream(arr2).boxed().collect(Collectors.toList());
+
     }
 
     @Test
