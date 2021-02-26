@@ -171,7 +171,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- 테스트 실패시에도 mvn 커맨드가 실패 처리되지 않도록 설정 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

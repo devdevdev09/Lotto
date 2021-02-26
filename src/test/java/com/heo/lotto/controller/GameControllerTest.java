@@ -1,21 +1,5 @@
 package com.heo.lotto.controller;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.restdocs.JUnitRestDocumentation;
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
-import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -32,6 +16,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.restdocs.JUnitRestDocumentation;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
+import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MockMvcBuilder;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class GameControllerTest {
@@ -47,20 +48,50 @@ public class GameControllerTest {
 
     @Before
     public void setUp(){
-        // this.document = document(
-        //     "{class-name}/{method-name}",
-        //     preprocessResponse(prettyPrint())
-        // );
+        this.document = document(
+            "{class-name}/{method-name}",
+            preprocessResponse(prettyPrint())
+        );
 
-        // this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
-        // .apply(documentationConfiguration(this.restDocumentation)
-        // .uris().withScheme("http").withHost("127.0.0.1").withPort(2222))
-        // .alwaysDo(document)
-        // .build();
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
+        .apply(documentationConfiguration(this.restDocumentation)
+        .uris().withScheme("http").withHost("127.0.0.1").withPort(2222))
+        .alwaysDo(document)
+        .build();
     }
 
     @Test
     public void getLotto() throws Exception{
+        mockMvc.perform(
+            RestDocumentationRequestBuilders.get("/getLotto/{cnt}", "3")  
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document.document(
+                    pathParameters(
+                        parameterWithName("id").description("github_id")
+                    ),
+                    requestParameters(
+                        parameterWithName("year").description("요청년도").optional()
+                    ),
+                    responseFields(
+                        fieldWithPath("user").description("github id"),
+                        fieldWithPath("date").description("체크일자"),
+                        fieldWithPath("daily").type(Boolean.class).description("커밋여부"),
+                        fieldWithPath("continues").type(Integer.class).description("연속일수")
+                    )
+                ))
+                .andExpect(jsonPath("user", is(notNullValue())))
+                .andExpect(jsonPath("date", is(notNullValue())))
+                .andExpect(jsonPath("daily", is(notNullValue())))
+                .andExpect(jsonPath("continues", is(notNullValue())));
     }
+
+    @Test
+    public void testss(){
+        System.out.println("test");
+    }
+
+
        
 }
