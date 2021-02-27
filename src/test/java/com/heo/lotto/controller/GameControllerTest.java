@@ -63,28 +63,25 @@ public class GameControllerTest {
     @Test
     public void getLotto() throws Exception{
         mockMvc.perform(
-            RestDocumentationRequestBuilders.get("/getLotto/{cnt}", "3")  
+            RestDocumentationRequestBuilders.get("/lotto/{cnt}", "1")  
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document.document(
                     pathParameters(
-                        parameterWithName("id").description("github_id")
-                    ),
-                    requestParameters(
-                        parameterWithName("year").description("요청년도").optional()
-                    ),
-                    responseFields(
-                        fieldWithPath("user").description("github id"),
-                        fieldWithPath("date").description("체크일자"),
-                        fieldWithPath("daily").type(Boolean.class).description("커밋여부"),
-                        fieldWithPath("continues").type(Integer.class).description("연속일수")
+                        parameterWithName("cnt").description("cnt")
                     )
-                ))
-                .andExpect(jsonPath("user", is(notNullValue())))
-                .andExpect(jsonPath("date", is(notNullValue())))
-                .andExpect(jsonPath("daily", is(notNullValue())))
-                .andExpect(jsonPath("continues", is(notNullValue())));
+                    // responseFields(
+                    //     // fieldWithPath("date").description("github id"),
+                    //     // fieldWithPath("week").description("체크일자"),
+                    //     // fieldWithPath("number").type(Boolean.class).description("커밋여부"),
+                    //     // fieldWithPath("winning").type(Integer.class).description("연속일수")
+                    // )
+                ));
+                // .andExpect(jsonPath("user", is(notNullValue())))
+                // .andExpect(jsonPath("date", is(notNullValue())))
+                // .andExpect(jsonPath("daily", is(notNullValue())))
+                // .andExpect(jsonPath("continues", is(notNullValue())));
     }
 
     @Test
