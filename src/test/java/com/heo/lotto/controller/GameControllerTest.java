@@ -71,17 +71,7 @@ public class GameControllerTest {
                     pathParameters(
                         parameterWithName("cnt").description("cnt")
                     )
-                    // responseFields(
-                    //     // fieldWithPath("date").description("github id"),
-                    //     // fieldWithPath("week").description("체크일자"),
-                    //     // fieldWithPath("number").type(Boolean.class).description("커밋여부"),
-                    //     // fieldWithPath("winning").type(Integer.class).description("연속일수")
-                    // )
                 ));
-                // .andExpect(jsonPath("user", is(notNullValue())))
-                // .andExpect(jsonPath("date", is(notNullValue())))
-                // .andExpect(jsonPath("daily", is(notNullValue())))
-                // .andExpect(jsonPath("continues", is(notNullValue())));
     }
 
     @Test
