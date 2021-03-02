@@ -12,6 +12,10 @@
 - 게임별 당첨현황, 1회당첨 소요금액 등 찾기
 - 등수별 당첨 체크하기
 
+### 2021-03-02
+- localhost:port/docs/api-docs.html
+- maven > clean > install 성공하면 생김
+
 ### 2021-02-11
 - interface 재정의하기
 ### 2021-02-10
