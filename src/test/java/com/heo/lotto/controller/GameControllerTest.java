@@ -63,13 +63,13 @@ public class GameControllerTest {
     @Test
     public void getLotto() throws Exception{
         mockMvc.perform(
-            RestDocumentationRequestBuilders.get("/lotto/{cnt}", "1")  
+            RestDocumentationRequestBuilders.get("/lotto/{cnt}", "6")  
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document.document(
                     pathParameters(
-                        parameterWithName("cnt").description("cnt")
+                        parameterWithName("cnt").description("요청할 수[1~6]")
                     )
                 ));
     }

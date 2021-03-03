@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.heo.lotto.domain.Game;
+import com.heo.lotto.domain.Numbers;
 import com.heo.lotto.enums.LogType;
 import com.heo.lotto.service.FileService;
 import com.heo.lotto.service.GameService;
@@ -96,22 +97,25 @@ public class GameController {
     }
 
     @PostMapping("/lotto")
-    public <T> ResponseEntity<T> lotto(
+    public ResponseEntity<Numbers> lotto(
         @RequestBody(required = false) Map<String,Object> param) {
 
-            System.out.println(param);
+        Numbers nums = null;
         if(param != null){
             if(param.get("key").equals("heo")){
                 System.out.println("인증");
                 Map<String,Object> data = (Map<String,Object>)param.get("data");
                 List<Integer> numbers = (List<Integer>)data.get("numbers");
-                System.out.println();
+                int[] arr = numbers.stream().mapToInt(i->i).toArray();;
+                
+                nums = new Numbers(arr);
             }else{
                 System.out.println("실패");
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        
+        return new ResponseEntity<Numbers>(nums, HttpStatus.OK);
     }
     
 }
