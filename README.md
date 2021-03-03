@@ -1,9 +1,9 @@
 # Lotto
 
 ## TODO
-- api docs 생성하기 > api-docs.html 안생김?
-- 만들어지는 모든번호 기록하기(Long)
+- test용 타입 설정하기
 
+- 만들어지는 모든번호 기록하기(Long)
 - 회차별 당첨자 체크하기 -> Response Type 정하기
 - SpringConfig 작성하기
 - test 코드 작성하기
