@@ -2,6 +2,7 @@ package com.heo.lotto.controller;
 
 import java.util.Optional;
 
+import com.heo.lotto.domain.Numbers;
 import com.heo.lotto.service.MyService;
 import com.heo.lotto.service.NumberService;
 
@@ -23,7 +24,7 @@ public class MainController {
     }
 
     @GetMapping(value = {"/", "/lotto", "/lotto/{cnt}"})
-    public int[] getLotto(@PathVariable(required = false) Integer cnt){
+    public Numbers getLotto(@PathVariable(required = false) Integer cnt){
         if(cnt == null) 
             cnt = 6;
             
@@ -33,7 +34,7 @@ public class MainController {
         int[] arr = new int[cnt];
         arr = numberService.getNumber(cnt);
 
-        return arr;
+        return new Numbers(arr);
     }
 
     @GetMapping(value = {"/lotto2", "/lotto2/{cnt}"})

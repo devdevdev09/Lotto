@@ -1,7 +1,8 @@
-= lotto
+= Lotto
 
-== lottttottttt
+== Lotto 6/45
 include::{snippets}/game-controller-test/get-lotto/http-request.adoc[]
+include::{snippets}/game-controller-test/get-lotto/curl-request.adoc[]
 include::{snippets}/game-controller-test/get-lotto/path-parameters.adoc[]
-// include::{snippets}/game-controller-test/get-lotto/request-parameters.adoc[]
+include::{snippets}/game-controller-test/get-lotto/response-fields.adoc[]
 include::{snippets}/game-controller-test/get-lotto/http-response.adoc[]

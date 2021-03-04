@@ -2,6 +2,7 @@ package com.heo.lotto.controller;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 // import static
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
@@ -70,8 +71,21 @@ public class GameControllerTest {
                 .andDo(document.document(
                     pathParameters(
                         parameterWithName("cnt").description("요청할 수[1~6]")
+                    ),responseFields(
+                        fieldWithPath("num1").description("첫번째숫자"),
+                        fieldWithPath("num2").description("두번째숫자"),
+                        fieldWithPath("num3").description("세번째숫자"),
+                        fieldWithPath("num4").description("네번째숫자"),
+                        fieldWithPath("num5").description("다섯번째숫자"),
+                        fieldWithPath("num6").description("여섯번째숫자")
                     )
-                ));
+                ))
+                .andExpect(jsonPath("num1", is(notNullValue())))
+                .andExpect(jsonPath("num2", is(notNullValue())))
+                .andExpect(jsonPath("num3", is(notNullValue())))
+                .andExpect(jsonPath("num4", is(notNullValue())))
+                .andExpect(jsonPath("num5", is(notNullValue())))
+                .andExpect(jsonPath("num6", is(notNullValue())));
     }
 
     @Test
