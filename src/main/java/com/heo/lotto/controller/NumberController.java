@@ -28,7 +28,7 @@ public class NumberController {
 
     @PostMapping("/")
     public ResponseEntity<Void> postNumbers(){
-        URI location = UriComponentsBuilder.fromPath("/numbers").buildAndExpand("/test").toUri();
+        URI location = UriComponentsBuilder.fromPath("/numbers/{id}").buildAndExpand("10").toUri();
         
         return ResponseEntity.created(location).build();
     }
