@@ -20,31 +20,31 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Controller
 @RequestMapping("/numbers")
 public class NumberController {
-    
+
     @GetMapping("/")
-    public ResponseEntity<Numbers> getNumbers(){
+    public ResponseEntity<Numbers> getNumbers() {
         return null;
     }
 
     @PostMapping("/")
-    public ResponseEntity<Void> postNumbers(){
+    public ResponseEntity<Void> postNumbers() {
         URI location = UriComponentsBuilder.fromPath("/numbers/{id}").buildAndExpand("10").toUri();
-        
+
         return ResponseEntity.created(location).build();
     }
 
     @PutMapping("/")
-    public ResponseEntity<Void> putNumbers(){
+    public ResponseEntity<Void> putNumbers() {
         return null;
     }
 
     @PatchMapping("/")
-    public ResponseEntity<Void> patchNumbers(){
+    public ResponseEntity<Void> patchNumbers() {
         return null;
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> deleteNumbers(){
+    public ResponseEntity<Void> deleteNumbers() {
         return null;
     }
 }
