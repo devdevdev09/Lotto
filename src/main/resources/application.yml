@@ -4,7 +4,7 @@ server:
 
 logging:
     file:
-        name: /logs/lotto/lotto.log
+        name: logs/lotto/lotto.log
 
 str:
     divider: " : "
