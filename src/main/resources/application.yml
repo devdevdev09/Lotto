@@ -29,4 +29,4 @@ kakao:
         sendme: https://kapi.kakao.com/v2/api/talk/memo/default/send
 
 url:
-    msgbot: localhost:20090/send
+    msgbot: localhost:20010/send
