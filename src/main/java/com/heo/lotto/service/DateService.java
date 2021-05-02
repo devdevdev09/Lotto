@@ -45,9 +45,12 @@ public class DateService {
         
         LocalDate date1 = LocalDate.of(year,month,day);
         LocalDate date2 = LocalDate.now();
-        int sr = date2.compareTo(date1);
+    
+        
+        int d1 = date1.getDayOfYear();
+        int d2 = date2.getDayOfYear();
 
-        return BASE_NO + sr/7;
+        return BASE_NO + (d2-d1)/7;
     }
 }
 

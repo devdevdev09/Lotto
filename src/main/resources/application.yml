@@ -23,10 +23,5 @@ lotto:
         date: 2021-01-23
         no: 947
 
-kakao:
-    talk:
-        key: ${kakao.talk.key}
-        sendme: https://kapi.kakao.com/v2/api/talk/memo/default/send
-
 url:
-    msgbot: localhost:20010/send
+    msgbot: http://localhost:20010/sendslack

@@ -4,6 +4,7 @@ import com.heo.lotto.domain.Lotto;
 import com.heo.lotto.service.lotto.ApiService;
 import com.heo.lotto.service.message.MessageService;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,14 +22,14 @@ public class DataServiceImpl implements DataService {
     }
     
     @Override
+    @Scheduled(cron="0 */10 21-23 * * 6")
     public void getWinNumber(){
-
         int weekNo = dateService.getWeekNo();
 
         Lotto result = apiService.getLottoByNo(weekNo);
         
         if(!result.getReturnValue().equals("fail") && !isWinUpdate){
-            //isWinUpdate = true;
+            isWinUpdate = true;
             slack.sendMessage(result.toString());
         }
     }

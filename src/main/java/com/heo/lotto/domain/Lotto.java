@@ -26,7 +26,7 @@ public class Lotto {
 
     @Override
     public String toString(){
-        String result = drwNoDate + " : " + drwNo + " : " + drwtNo1 + " : " + drwtNo2 + "," + drwtNo3 + "," + drwtNo4 + "," + drwtNo5 + "," + drwtNo6;
+        String result = drwNoDate + " : " + drwNo + " : " + drwtNo1 + "," + drwtNo2 + "," + drwtNo3 + "," + drwtNo4 + "," + drwtNo5 + "," + drwtNo6;
         
         return result;
     }

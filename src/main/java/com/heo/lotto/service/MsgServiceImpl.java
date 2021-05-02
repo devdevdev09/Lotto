@@ -27,6 +27,7 @@ public class MsgServiceImpl implements MessageService{
     @Override
     public HttpStatus sendMessage(String msg) {
         MultiValueMap<String,String> body = new LinkedMultiValueMap<>();
+        body.add("msg", msg);
 
         RequestEntity request = RequestEntity
                                     .post(URI.create(MSG_URL))
