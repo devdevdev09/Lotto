@@ -22,7 +22,6 @@ public class DataServiceImpl implements DataService {
     }
 
     @Override
-    @Scheduled(cron = "10 */10 21-23 * * 6")
     public void getWinNumber() {
         int weekNo = dateService.getWeekNo();
 
@@ -35,7 +34,6 @@ public class DataServiceImpl implements DataService {
     }
 
     @Override
-    @Scheduled(cron = "0 0 21 * * 6")
     public void updateFalse() {
         isWinUpdate = false;
     }

@@ -15,12 +15,12 @@ public class CronService {
         this.dataService = dataService;
     }
     
-    @Scheduled(cron = "0 */5 21 * * SAT")
+    @Scheduled(cron = "10 */5 21-23 * * SAT")
     public void winCheck(){
         dataService.getWinNumber();
     }
 
-    @Scheduled(cron = "0 0 22 * * 7")
+    @Scheduled(cron = "0 0 21 * * 6")
     public void winCheck2(){
         dataService.updateFalse();
     }
